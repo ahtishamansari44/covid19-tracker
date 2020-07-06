@@ -5,7 +5,7 @@ import Navbar from './components/navbar'
 import Grid from '@material-ui/core/Grid';
 import GlobalData from './components/globalData'
 import CountryData from './components/countryData'
-import MapData from './components/mapData'
+// import MapData from './components/mapData'
 
 
 function App() {
@@ -14,10 +14,10 @@ function App() {
       <Navbar />
       <Grid container>
       <GlobalData />
-      <MapData />
+      {/* <MapData /> */}
+      <CountryData />
       </Grid>
       <hr />
-      <CountryData />
     </div>
   );
 }

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, Fragment} from 'react'
 import { makeStyles, Grid, Paper, Typography } from '@material-ui/core';
 import CountrySelector from './countrySelector'
 import {fetchCountryData} from './api'
@@ -48,7 +48,9 @@ export default function CountryData() {
   
 console.log(getCountry)
   return (
-    <div className="grid">
+    <Fragment>
+        <Grid item xs={12} sm={8} md={9}>
+          <div className="map">
       <Grid container spacing={3}>
       <Grid item xs={12} sm={12}>
       <Typography variant="h5">
@@ -60,9 +62,9 @@ console.log(getCountry)
           <Paper variant="outlined" className={classes.paper}>
           <Grid container spacing={3}>
           <Grid item xs={12} sm={4} md={4}>
-          <Paper variant="outlined" className={classes.paper}>
+          <Paper variant="" className={classes.paper}>
             <Typography variant="h5" className={classes.red}>
-            {getCountry.recovered}
+            {getCountry.confirmed}
         </Typography>
         <Typography variant="h6"  className={classes.red}>
          Confirmed 
@@ -70,9 +72,9 @@ console.log(getCountry)
         </Paper>
          </Grid>
          <Grid item xs={12} sm={4} md={4}>
-          <Paper variant="outlined" className={classes.paper}>
+          <Paper variant="" className={classes.paper}>
           <Typography variant="h5" className={classes.green}>
-          {getCountry.confirmed}
+          {getCountry.recovered}
         </Typography>
         <Typography variant="h6" className={classes.green}>
          Recovered    
@@ -80,7 +82,7 @@ console.log(getCountry)
           </Paper>
          </Grid>
          <Grid item xs={12} sm={4} md={4}>
-          <Paper variant="outlined" className={classes.paper}>
+          <Paper variant="" className={classes.paper}>
           <Typography variant="h5"  className={classes.gray}>
           {getCountry.deaths}
         </Typography>
@@ -94,26 +96,34 @@ console.log(getCountry)
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Paper variant="outlined" className={classes.paper}>
-          <Typography variant="h4">
-          {(getCountry.deaths/getCountry.confirmed * 100).toFixed(1)}
+          <Paper variant="" className={classes.paper}>
+          <Typography variant="h5" className={classes.green}>
+          {(getCountry.recovered/getCountry.confirmed * 100).toFixed(1)}%
         </Typography>
-        <Typography variant="h6">
+        <Typography variant="h6" className={classes.green}>
           Recovery Rate
         </Typography>
+        </Paper>
           </Paper>
         </Grid>
         <Grid item xs={12} sm={6} md={3}>
           <Paper variant="outlined" className={classes.paper}>
-          <Typography variant="h4">
-          {(getCountry.recovered/getCountry.confirmed * 100).toFixed(1)}
+          <Paper variant="" className={classes.paper}>
+          <Typography variant="h5">
+          {(getCountry.deaths/getCountry.confirmed * 100).toFixed(1)}%          
         </Typography>
         <Typography variant="h6">
-          Recovery Rate
+        Fatality Rate
         </Typography>
+        </Paper>
           </Paper>
         </Grid>
       </Grid>
+      {/* <Grid item xs={12} sm={6} md={3}> */}
       <MyChart data={getCountry} />
+      {/* </Grid> */}
     </div>
+      </Grid>
+      </Fragment>
   );
 }
